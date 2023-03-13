@@ -142,6 +142,17 @@ public class ExpenseIncomeController {
         return test;
     }
 
+
+    @CrossOrigin
+    @PutMapping("/deleteExpense")
+    public ResponseEntity<?> deleteExpense(@PathVariable ("id") String id) throws SQLException{
+        return new ResponseEntity<>(deleteExpenseHelper(id), HttpStatus.OK);
+    }
+
+    public String deleteExpenseHelper(String id) throws SQLException{
+        statement.execute("DELETE FROM bank.expenses WHERE expense_id = '" + id + "' ");
+        return("Expense #" + id + " deleted");
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Old Code from previous database project with examples of querying a database
 
